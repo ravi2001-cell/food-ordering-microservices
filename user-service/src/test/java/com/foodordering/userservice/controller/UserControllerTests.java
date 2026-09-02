@@ -1,7 +1,7 @@
 package com.foodordering.userservice.controller;
 
 import com.foodordering.userservice.dto.UserDTO;
-import com.foodordering.userservice.entity.User;
+import com.foodordering.userservice.repository.UserRepository;
 import com.foodordering.userservice.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,13 +28,22 @@ class UserControllerTests {
     private UserService userService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     private UserDTO testUserDTO;
 
     @BeforeEach
     void setUp() {
-        testUserDTO = new UserDTO("John Doe", "john@example.com");
+        // Clear H2 data before every test
+        userRepository.deleteAll();
+
+        testUserDTO = new UserDTO(
+                "John Doe",
+                "john@example.com"
+        );
     }
 
     @Test
