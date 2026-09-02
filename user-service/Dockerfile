@@ -30,10 +30,6 @@ RUN chown -R appuser:appuser /app
 # Switch to non-root user
 USER appuser
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-  CMD java -cp app.jar org.springframework.boot.loader.JarLauncher -version || exit 1
-
 EXPOSE 8081
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
