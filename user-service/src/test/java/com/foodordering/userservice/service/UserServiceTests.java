@@ -31,34 +31,22 @@ class UserServiceTests {
 
     @Test
     void testCreateUser() {
-        UserDTO userDTO = new UserDTO("John Doe", "john@example.com");
+        UserDTO userDTO = new UserDTO("Alice", "alice@example.com");
         User user = userService.createUser(userDTO);
 
         assertNotNull(user.getId());
-        assertEquals("John Doe", user.getName());
-        assertEquals("john@example.com", user.getEmail());
-    }
-
-    @Test
-    void testGetAllUsers() {
-        UserDTO user1 = new UserDTO("User One", "user1@example.com");
-        UserDTO user2 = new UserDTO("User Two", "user2@example.com");
-
-        userService.createUser(user1);
-        userService.createUser(user2);
-
-        List<User> users = userService.getAllUsers();
-        assertEquals(2, users.size());
+        assertEquals("Alice", user.getName());
+        assertEquals("alice@example.com", user.getEmail());
     }
 
     @Test
     void testGetUserById() {
-        UserDTO userDTO = new UserDTO("Test User", "test@example.com");
+        UserDTO userDTO = new UserDTO("Bob", "bob@example.com");
         User createdUser = userService.createUser(userDTO);
 
         User retrievedUser = userService.getUserById(createdUser.getId());
         assertEquals(createdUser.getId(), retrievedUser.getId());
-        assertEquals("Test User", retrievedUser.getName());
+        assertEquals("Bob", retrievedUser.getName());
     }
 
     @Test
@@ -66,5 +54,14 @@ class UserServiceTests {
         assertThrows(ResourceNotFoundException.class, () -> {
             userService.getUserById(999L);
         });
+    }
+
+    @Test
+    void testGetAllUsers() {
+        userService.createUser(new UserDTO("User1", "user1@example.com"));
+        userService.createUser(new UserDTO("User2", "user2@example.com"));
+
+        List<User> users = userService.getAllUsers();
+        assertEquals(2, users.size());
     }
 }

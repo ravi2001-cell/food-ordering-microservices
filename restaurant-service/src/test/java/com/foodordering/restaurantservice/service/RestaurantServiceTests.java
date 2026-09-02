@@ -40,25 +40,13 @@ class RestaurantServiceTests {
     }
 
     @Test
-    void testGetAllRestaurants() {
-        RestaurantDTO r1 = new RestaurantDTO("Restaurant 1", "Location 1");
-        RestaurantDTO r2 = new RestaurantDTO("Restaurant 2", "Location 2");
-
-        restaurantService.createRestaurant(r1);
-        restaurantService.createRestaurant(r2);
-
-        List<Restaurant> restaurants = restaurantService.getAllRestaurants();
-        assertEquals(2, restaurants.size());
-    }
-
-    @Test
     void testGetRestaurantById() {
-        RestaurantDTO restaurantDTO = new RestaurantDTO("Test Restaurant", "Test Location");
+        RestaurantDTO restaurantDTO = new RestaurantDTO("Burger King", "Mumbai");
         Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantDTO);
 
         Restaurant retrievedRestaurant = restaurantService.getRestaurantById(createdRestaurant.getId());
         assertEquals(createdRestaurant.getId(), retrievedRestaurant.getId());
-        assertEquals("Test Restaurant", retrievedRestaurant.getName());
+        assertEquals("Burger King", retrievedRestaurant.getName());
     }
 
     @Test
@@ -66,5 +54,14 @@ class RestaurantServiceTests {
         assertThrows(ResourceNotFoundException.class, () -> {
             restaurantService.getRestaurantById(999L);
         });
+    }
+
+    @Test
+    void testGetAllRestaurants() {
+        restaurantService.createRestaurant(new RestaurantDTO("Restaurant1", "City1"));
+        restaurantService.createRestaurant(new RestaurantDTO("Restaurant2", "City2"));
+
+        List<Restaurant> restaurants = restaurantService.getAllRestaurants();
+        assertEquals(2, restaurants.size());
     }
 }
