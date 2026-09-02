@@ -116,7 +116,7 @@ services:
         mode: ingress
 
     configs:
-      - source: nginx_config
+      - source: nginx_config_v2
         target: /etc/nginx/nginx.conf
 
     networks:
@@ -135,5 +135,5 @@ volumes:
   mysql-data:
 
 configs:
-  nginx_config:
+  nginx_config_v2:
     file: ./nginx/nginx.conf
