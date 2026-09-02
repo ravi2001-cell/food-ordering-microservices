@@ -19,7 +19,7 @@ services:
         condition: on-failure
 
   user-service:
-    image: rkdocker1800/food-user:v1
+    image: rkdocker1800/fms:user-v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -31,9 +31,11 @@ services:
       - food-network
     deploy:
       replicas: 1
+      restart_policy:
+        condition: on-failure
 
   restaurant-service:
-    image: rkdocker1800/food-restaurant:v1
+    image: rkdocker1800/fms:restaurant-v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -45,9 +47,11 @@ services:
       - food-network
     deploy:
       replicas: 1
+      restart_policy:
+        condition: on-failure
 
   order-service:
-    image: rkdocker1800/food-order:v1
+    image: rkdocker1800/fms:order-v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -59,9 +63,11 @@ services:
       - food-network
     deploy:
       replicas: 1
+      restart_policy:
+        condition: on-failure
 
   payment-service:
-    image: rkdocker1800/food-payment:v1
+    image: rkdocker1800/fms:payment-v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -73,9 +79,11 @@ services:
       - food-network
     deploy:
       replicas: 1
+      restart_policy:
+        condition: on-failure
 
   notification-service:
-    image: rkdocker1800/food-notification:v1
+    image: rkdocker1800/fms:notification-v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -87,6 +95,25 @@ services:
       - food-network
     deploy:
       replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: ingress
+    configs:
+      - source: nginx_config
+        target: /etc/nginx/nginx.conf
+    networks:
+      - food-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 networks:
   food-network:
@@ -94,3 +121,7 @@ networks:
 
 volumes:
   mysql-data:
+
+configs:
+  nginx_config:
+    file: ./nginx/nginx.conf
