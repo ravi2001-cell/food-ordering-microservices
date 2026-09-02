@@ -3,12 +3,7 @@
 
 # Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+*.log.*
 
 # Package Files #
 *.jar
@@ -19,6 +14,144 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# Eclipse
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# JetBrains IDEs
+.idea_modules/
+*.swp
+*.swo
+*~
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# NetBeans
+nbproject/
+nb-configuration.xml
+
+# Android Studio and Gradle
+.gradle
+.gradle/
+local.properties
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.~*
+
+# Application-specific
+*.log
+out/
+build/
+dist/
+*.class
+
+# Runtime
+spring-shell-history
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Secrets and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.p8
+*.conf
+secrets/
+*.yml.bak
+*.properties.bak
+
+# AWS credentials
+.aws/
+*.aws
+
+# Docker
+docker-compose.override.yml
+.dockerignore.bak
+
+# Node (if any)
+node_modules/
+npm-debug.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# Coverage reports
+.coverage
+htmlcov/
+.pytest_cache/
+.jacoco/
+*.exec
+
+# IDE generated
+.factorypath
+
+# Spring Boot
+.m2/
+spring-boot-app.pid
