@@ -19,7 +19,7 @@ services:
         condition: on-failure
 
   user-service:
-    image: food-user:1.0
+    image: rkdocker1800/food-user:v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -29,15 +29,11 @@ services:
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
     networks:
       - food-network
-    depends_on:
-      - mysql
     deploy:
       replicas: 1
-      restart_policy:
-        condition: on-failure
 
   restaurant-service:
-    image: food-restaurant:1.0
+    image: rkdocker1800/food-restaurant:v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -47,15 +43,11 @@ services:
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
     networks:
       - food-network
-    depends_on:
-      - mysql
     deploy:
       replicas: 1
-      restart_policy:
-        condition: on-failure
 
   order-service:
-    image: food-order:1.0
+    image: rkdocker1800/food-order:v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -65,15 +57,11 @@ services:
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
     networks:
       - food-network
-    depends_on:
-      - mysql
     deploy:
       replicas: 1
-      restart_policy:
-        condition: on-failure
 
   payment-service:
-    image: food-payment:1.0
+    image: rkdocker1800/food-payment:v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -83,15 +71,11 @@ services:
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
     networks:
       - food-network
-    depends_on:
-      - mysql
     deploy:
       replicas: 1
-      restart_policy:
-        condition: on-failure
 
   notification-service:
-    image: food-notification:1.0
+    image: rkdocker1800/food-notification:v1
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
@@ -101,12 +85,8 @@ services:
       JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
     networks:
       - food-network
-    depends_on:
-      - mysql
     deploy:
       replicas: 1
-      restart_policy:
-        condition: on-failure
 
 networks:
   food-network:
