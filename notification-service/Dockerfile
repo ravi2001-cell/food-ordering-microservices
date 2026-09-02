@@ -15,7 +15,7 @@ FROM eclipse-temurin:21-jre-noble
 
 WORKDIR /app
 
-RUN useradd -m -u 1000 appuser
+RUN useradd -m appuser
 
 COPY --from=builder /app/target/*.jar app.jar
 
