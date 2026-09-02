@@ -19,7 +19,7 @@ FROM eclipse-temurin:21-jre-noble
 WORKDIR /app
 
 # Create non-root user
-RUN useradd -m -u 1000 appuser
+RUN useradd -m appuser
 
 # Copy JAR from builder
 COPY --from=builder /app/target/*.jar app.jar
