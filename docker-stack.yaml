@@ -1,0 +1,116 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: fooddb
+      MYSQL_USER: fooduser
+      MYSQL_PASSWORD: foodpass123
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - food-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  user-service:
+    image: food-user:1.0
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fooddb
+      DB_USERNAME: fooduser
+      DB_PASSWORD: foodpass123
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+    networks:
+      - food-network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  restaurant-service:
+    image: food-restaurant:1.0
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fooddb
+      DB_USERNAME: fooduser
+      DB_PASSWORD: foodpass123
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+    networks:
+      - food-network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  order-service:
+    image: food-order:1.0
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fooddb
+      DB_USERNAME: fooduser
+      DB_PASSWORD: foodpass123
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+    networks:
+      - food-network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  payment-service:
+    image: food-payment:1.0
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fooddb
+      DB_USERNAME: fooduser
+      DB_PASSWORD: foodpass123
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+    networks:
+      - food-network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+  notification-service:
+    image: food-notification:1.0
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: fooddb
+      DB_USERNAME: fooduser
+      DB_PASSWORD: foodpass123
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx512m"
+    networks:
+      - food-network
+    depends_on:
+      - mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  food-network:
+    driver: overlay
+
+volumes:
+  mysql-data:
